@@ -1,0 +1,12 @@
+Question : Explain the reconciliation process. How do React.memo and useCallback help maintain referential equality across renders?
+
+Answer
+Reconciliation is the process React uses to compare the previous and new UI representations and determine the minimum necessary DOM updates.
+
+React.memo helps optimize this process by preventing unnecessary re-renders of functional components when their props haven't changed.
+
+However, React compares props shallowly. If we pass a function from a parent to a memoized child, a new function reference is created on every parent render.
+
+To solve this, we use useCallback, which preserves the function reference as long as its dependencies don't change.
+
+So React.memo checks whether props have changed, and useCallback helps maintain stable function references, allowing React.memo to work effectively.

@@ -1,0 +1,14 @@
+Question :
+
+ Explain how React’s diffing algorithm handles elements of different types versus the same type with different attributes
+
+
+Answer:
+
+React's diffing algorithm is part of reconciliation. It compares the previous and new Virtual DOM trees to identify the required updates.
+
+When React encounters elements of different types, it destroys the old element and its subtree and creates a new one. This also resets the state of components inside that subtree.
+
+When React encounters elements of the same type, it reuses the existing DOM node and updates only the changed attributes, properties, or text content.
+
+For lists, React uses keys to identify elements between renders, which helps it efficiently handle additions, deletions, and reordering

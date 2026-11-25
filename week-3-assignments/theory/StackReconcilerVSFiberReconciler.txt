@@ -1,0 +1,16 @@
+Question :- Compare the internal implementation of the Stack Reconciler with the Fiber Reconciler. How does the Fiber “unit of work” enable interruptible rendering?
+
+
+Answer:- 
+
+In the Stack Reconciler, React used recursive function calls to traverse the component tree. Since JavaScript execution was synchronous, React couldn't naturally pause the reconciliation process and give control back to the browser.
+
+React Fiber solves this by representing each component's work as a Fiber node. Each Fiber node contains pointers such as child, sibling, and return, which allow React to traverse the component tree incrementally.
+
+React processes these nodes through a work loop, performing one unit of work at a time. Between units, the scheduler can check whether it should yield control to the browser.
+
+If React needs to yield, it preserves the work-in-progress Fiber tree and resumes processing later. It can also prioritize urgent updates over less important updates.
+
+Finally, React separates the interruptible render phase from the synchronous commit phase, ensuring that partially completed rendering work is not exposed in the DOM.
+
+This architecture enables concurrent rendering, time slicing, prioritization, and a more responsive user interface.

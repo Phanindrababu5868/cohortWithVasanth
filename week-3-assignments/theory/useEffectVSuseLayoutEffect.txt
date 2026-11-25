@@ -1,0 +1,15 @@
+Question : Explain the difference between useEffect and useLayoutEffect. In what scenario would synchronous layout measurement be critical?
+
+
+Answer: 
+useEffect and useLayoutEffect are both used to handle side effects in React. The main difference is their execution timing.
+
+useEffect runs after the DOM updates and generally after the browser paints the screen. It is commonly used for API calls, subscriptions, event listeners, and other side effects.
+
+On the other hand, useLayoutEffect runs synchronously after the DOM updates but before the browser paints.
+
+I would use useLayoutEffect when I need synchronous DOM measurements, such as calculating the height, width, or position of an element.
+
+For example, when positioning a tooltip or dropdown dynamically, I would use useLayoutEffect to measure its dimensions and position it correctly before the browser paints. This prevents visual flickering.
+
+However, I prefer useEffect by default because useLayoutEffect blocks browser painting and can affect performance.
